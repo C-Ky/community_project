@@ -6,6 +6,7 @@
     <title>{%  block title %}Login{%  endblock %}</title>
 </head>
 <body>
+    {% block logout %}{% endblock %}
     {% block content %}
         <form method="post" action="{% url 'login' %}">
             {% csrf_token %}

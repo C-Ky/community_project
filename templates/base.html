@@ -8,6 +8,16 @@
     {%  block site_name %}
         <h1 style="text-align: center">In da Club</h1>
     {% endblock %}
+
+    {% block logout %} <!-- logout button -->
+        <form action="{%  url 'logout' %}">
+            <input type="submit" value="Logout">
+        </form>
+    {% endblock %}
+
+    {% block welcome_message %}
+
+    {% endblock %}
     {%  block content %}{%  endblock %}
 </body>
 </html>
