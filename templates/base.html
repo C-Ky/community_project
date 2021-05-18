@@ -3,21 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>{%  block title %}In da Club{% endblock %}</title>
+    <style>
+        {% block style %}
+        h1 {
+            text-indent: 50px;
+            font-size: 50px;
+        }
+        p {
+            text-indent: 50px;
+            font-size: 16px;
+        }
+        {% endblock %}
+        {% block style2 %}{% endblock %}
+    </style>
 </head>
 <body>
-    {%  block site_name %}
-        <h1 style="text-align: center">In da Club</h1>
+    {% block log %} <!-- login/logout button -->
+        <div style="text-align: right">
+            {% if user.is_authenticated %}
+                <form action="{%  url 'logout' %}">
+                    <input type="submit" value="Logout">
+                </form>
+            {% else %}
+                <form action="{%  url 'login' %}">
+                    <input type="submit" value="Login">
+                </form>
+            {% endif %}
+        </div>
     {% endblock %}
 
-    {% block logout %} <!-- logout button -->
-        <form action="{%  url 'logout' %}">
-            <input type="submit" value="Logout">
-        </form>
+    {%  block site_name %}
+        <h1>In da Club</h1>
     {% endblock %}
 
     {% block welcome_message %}
-
+        {% if user.is_authenticated %}
+            <p>Welcome {{ user.username }}</p>
+        {% endif %}
     {% endblock %}
+
     {%  block content %}{%  endblock %}
 </body>
 </html>

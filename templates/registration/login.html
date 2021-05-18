@@ -1,19 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
 {%  extends "base.html" %}
-<head>
-    <meta charset="UTF-8">
-    <title>{%  block title %}Login{%  endblock %}</title>
-</head>
-<body>
-    {% block logout %}{% endblock %}
-    {% block content %}
+{%  block title %}Login{%  endblock %}
+
+{% block style2 %}
+    div {
+        text-align: center;
+    }
+{% endblock %}
+
+{% block log %}{% endblock %}
+
+{% block content %}
+    <br><br>
+    <div>
+        <h2 style="font-size: 20px;">Login:</h2>
         <form method="post" action="{% url 'login' %}">
             {% csrf_token %}
-            {{ form }}
+            <!-- {{ form }} -->
+            <div style="text-indent: -93px;"><label for="username">Username:</label><br></div>
+            <input type="text" id="username" name="username"><br>
+            <div style="text-indent: -100px;"><label for="password">Password:</label><br></div>
+            <input type="password" id="password" name="password"><br><br>
             <input type="submit" value="login">
             <input type="hidden" name="next" value="{{ next }}">
         </form>
-    {% endblock %}
-</body>
-</html>
+    </div>
+{% endblock %}
