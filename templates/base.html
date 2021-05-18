@@ -9,6 +9,10 @@
             text-indent: 50px;
             font-size: 50px;
         }
+        a {
+            text-decoration: none;
+            color: black;
+        }
         p {
             text-indent: 50px;
             font-size: 16px;
@@ -33,7 +37,13 @@
     {% endblock %}
 
     {%  block site_name %}
-        <h1>In da Club</h1>
+        <h1>
+            {% if user.is_authenticated %}
+                <a href="{% url 'homepage_user' %}">In da Club</a>
+            {% else %}
+                <a href="{% url 'homepage' %}">In da Club</a>
+            {% endif %}
+        </h1>
     {% endblock %}
 
     {% block welcome_message %}
