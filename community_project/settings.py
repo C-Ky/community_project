@@ -102,7 +102,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_REDIRECT_URL = '/communitymanager/homepage'
+LOGIN_REDIRECT_URL = '/communitymanager/communautes'
 LOGOUT_REDIRECT_URL = '/accounts/login'
 
 # Internationalization

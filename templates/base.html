@@ -39,7 +39,7 @@
     {%  block site_name %}
         <h1>
             {% if user.is_authenticated %}
-                <a href="{% url 'homepage_user' %}">In da Club</a>
+                <a href="{% url 'communautes' %}">In da Club</a>
             {% else %}
                 <a href="{% url 'homepage' %}">In da Club</a>
             {% endif %}

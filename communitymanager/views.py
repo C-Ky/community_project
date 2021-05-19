@@ -8,6 +8,6 @@ def homepage(request):
 
 
 @login_required()
-def homepage_user(request):
-    """ Displays the homepage of a user """
-    return render(request, 'homepage_user.html', locals())
+def communautes(request):
+    """ Displays the homepage (first page to appear after logging in) of a user with the list of communities """
+    return render(request, 'communautes.html', locals())
