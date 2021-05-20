@@ -2,16 +2,16 @@
 {%  block title %}Login{%  endblock %}
 
 {% block style2 %}
-    div {
+    #centered {
         text-align: center;
     }
 {% endblock %}
 
-{% block log %}{% endblock %}
+{% block log %}<br>{% endblock %}
 
 {% block content %}
     <br><br>
-    <div>
+    <div id="centered">
         <h2 style="font-size: 20px;">Login:</h2>
         <form method="post" action="{% url 'login' %}">
             {% csrf_token %}
