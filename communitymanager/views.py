@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Communaute
+from .models import Communaute, Priorite, Post
 from .forms import SubscriptionForm
 from django.contrib.auth.models import User
 
@@ -32,3 +32,12 @@ def communautes(request):
     com = [(c, c.abonnes.filter(username=request.user.username).exists()) for c in com]
 
     return render(request, 'communautes.html', locals())
+
+
+@login_required()
+def communaute(request, id):
+    """ Displays the posts of the specified community """
+    # Getting all posts of the specified community
+    community = get_object_or_404(Communaute, id=id)
+    posts = Post.objects.filter(communaute=community)
+    return render(request, 'communaute.html', locals())

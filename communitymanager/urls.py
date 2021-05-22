@@ -4,4 +4,5 @@ from . import views
 
 urlpatterns = [
     path('communautes/', views.communautes, name='communautes'),
+    path('communaute/<int:id>', views.communaute, name="communaute"),
 ]
