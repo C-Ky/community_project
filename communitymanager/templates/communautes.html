@@ -4,7 +4,7 @@
     <h1 style="font-size: 30px">Communities</h1><br>
     {% for c, subscribed in com %}
         <div style="background-color: lightgrey; padding: 10px; margin-right: 100px">
-            <span>{{ c }}</span>
+            <span><a style="color: blue" href="{% url 'communaute' c.id %}">{{ c }}</a></span>
             <span style="text-align: right">
                 {% if subscribed %}
                     <form action="{%  url 'communautes' %}" method="POST">
