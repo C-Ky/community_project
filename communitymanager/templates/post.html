@@ -40,6 +40,7 @@
             <td>{{ post.description }}</td>
         </tr>
     </table><br>
+
     {% for comment in comments %}
         <div class="a">
             <p class="a">Comment by {{ comment.auteur }} on {{ comment.date_creation }}</p>
@@ -48,4 +49,13 @@
     {% empty %}
         <p>There are no comments for this post.</p>
     {% endfor %}
+
+    <br><p>Add a new comment</p>
+    <form action="{%  url 'post' id %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="auteur" value="{{ user.id }}"> <!-- SEE FORMS FOR MODELS -->
+        <input type="hidden" name="post" value="{{ post.id }}">
+        <textarea type="text" rows="2" cols="210" name="contenu"></textarea><br><br>
+        <input type="submit" value="Submit">
+    </form>
 {% endblock %}

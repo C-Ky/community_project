@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Communaute, Priorite, Post, Commentaire
-from .forms import SubscriptionForm
+from .forms import SubscriptionForm, CommentaireForm
 from django.contrib.auth.models import User
 
 
@@ -48,6 +48,9 @@ def post(request, id):
     """ Displays the specified post with its comments and allows creation of comments """
 
     # Creating comment
+    form = CommentaireForm(request.POST)
+    if form.is_valid():
+        form.save()
 
     # Getting post details and comments
     post = get_object_or_404(Post, id=id)
