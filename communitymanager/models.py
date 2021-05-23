@@ -25,7 +25,7 @@ class Post(models.Model):
     communaute = models.ForeignKey('Communaute', on_delete=models.CASCADE)
     priorite = models.ForeignKey('Priorite', on_delete=models.CASCADE)
     evenementiel = models.BooleanField(default=False)
-    date_evenement = models.DateTimeField(null=True, blank=True)
+    date_evenement = models.DateField(null=True, blank=True)
     auteur = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
