@@ -1,7 +1,7 @@
-from django.shortcuts import render, get_list_or_404, get_object_or_404
+from django.shortcuts import render, get_list_or_404, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Communaute, Priorite, Post, Commentaire
-from .forms import SubscriptionForm, CommentaireForm
+from .forms import SubscriptionForm, CommentaireForm, PostForm
 from django.contrib.auth.models import User
 
 
@@ -57,3 +57,16 @@ def post(request, id):
     comments = Commentaire.objects.filter(post=post)
 
     return render(request, 'post.html', locals())
+
+
+@login_required()
+def nouveau_post(request):
+    """ Page to create a new post """
+    communities = Communaute.objects.all()
+    priorities = Priorite.objects.all()
+    post_id = Post.objects.count()+1
+    form = PostForm(request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect('post/{0}'.format(post_id))
+    return render(request, 'nouveau_post.html', locals())
