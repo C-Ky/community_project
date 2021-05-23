@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Communaute, Priorite, Post
+from .models import Communaute, Priorite, Post, Commentaire
 from .forms import SubscriptionForm
 from django.contrib.auth.models import User
 
@@ -41,3 +41,16 @@ def communaute(request, id):
     community = get_object_or_404(Communaute, id=id)
     posts = Post.objects.filter(communaute=community)
     return render(request, 'communaute.html', locals())
+
+
+@login_required()
+def post(request, id):
+    """ Displays the specified post with its comments and allows creation of comments """
+
+    # Creating comment
+
+    # Getting post details and comments
+    post = get_object_or_404(Post, id=id)
+    comments = Commentaire.objects.filter(post=post)
+
+    return render(request, 'post.html', locals())
