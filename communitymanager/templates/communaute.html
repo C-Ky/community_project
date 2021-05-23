@@ -20,7 +20,7 @@
     {% for post in posts %}
         <table class="a">
             <tr>
-                <th>{{ post.titre }}</th>
+                <th><a style="color: blue" href="{% url 'post' post.id %}">{{ post.titre }}</a></th>
                 <td style="text-align: right" rowspan="2">
                     <p class="a">{{ post.communaute }}</p>
                     <p class="a">by {{ post.auteur }} on {{ post.date_creation }}</p>
