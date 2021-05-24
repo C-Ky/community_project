@@ -64,11 +64,18 @@ def post(request, id):
 @login_required()
 def nouveau_post(request):
     """ Page to create a new post """
+    # Getting data
+    # Possible values for select input type
     communities = Communaute.objects.all()
     priorities = Priorite.objects.all()
-    post_id = Post.objects.count()+1
+    # Default values
+    p = Post()
+    p.titre = 'title'
+    p.description = 'description'
+
     form_post = PostForm(request.POST)
     if form_post.is_valid():
-        form_post.save()
-        return redirect('post/{0}'.format(post_id))
-    return render(request, 'nouveau_post.html', locals())
+        new_post = form_post.save()
+        return redirect('post/{0}'.format(new_post.id))
+
+    return render(request, 'submit_post.html', locals())
