@@ -60,6 +60,8 @@ def post(request, id):
     # Getting post details and comments
     post = get_object_or_404(Post, id=id)
     comments = Commentaire.objects.filter(post=post)
+    nb_comments = comments.count()
+    rowspan = 2+post.evenementiel
 
     return render(request, 'post.html', locals())
 

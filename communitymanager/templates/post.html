@@ -30,15 +30,20 @@
     <table class="a">
         <tr>
             <th>{{ post.titre }}</th>
-            <td style="text-align: right" rowspan="2">
+            <td style="text-align: right" rowspan="{{ rowspan }}">
                 <p class="a">{{ post.communaute }}</p>
                 <p class="a">by {{ post.auteur }} on {{ post.date_creation }}</p>
-                <p class="a">nb comments</p>
+                <p class="a">{{ nb_comments }} comments</p>
             </td>
         </tr>
         <tr>
             <td>{{ post.description }}</td>
         </tr>
+        {% if post.evenementiel %}
+            <tr>
+                <td>Event date: {{ post.date_evenement }}</td>
+            </tr>
+        {% endif %}
     </table><br>
 
     {% for comment in comments %}
