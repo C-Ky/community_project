@@ -52,6 +52,11 @@ def post(request, id):
     if form.is_valid():
         form.save()
 
+    # Getting info from new post if necessary
+    form_post = PostForm(request.POST)
+    if form_post.is_valid():
+        form_post.save()
+
     # Getting post details and comments
     post = get_object_or_404(Post, id=id)
     comments = Commentaire.objects.filter(post=post)
@@ -65,8 +70,4 @@ def nouveau_post(request):
     communities = Communaute.objects.all()
     priorities = Priorite.objects.all()
     post_id = Post.objects.count()+1
-    form = PostForm(request.POST)
-    if form.is_valid():
-        form.save()
-        return redirect('post/{0}'.format(post_id))
     return render(request, 'nouveau_post.html', locals())
