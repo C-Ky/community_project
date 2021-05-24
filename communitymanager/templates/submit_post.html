@@ -11,19 +11,20 @@
 
 {% block content %}
 
-    {% block titles %}
+    {% block head %}
         {% comment %}
         <h1 style="font-size: 30px">Create a new post</h1><br>
         <form action="{% url 'nouveau_post' %}" method="POST">
         {% endcomment %}
     {% endblock %}
 
+    {% block submit_post %}
             {% csrf_token %}
             <input type="hidden" name="auteur" value="{{ user.id }}">
             <div class="a"><label for="id_communaute">Community</label><br>
                 <select id="id_communaute" name="communaute">
                     {% for community in communities %}
-                        {% if community == p.community %}
+                        {% if community == p.communaute %}
                             <option value="{{ community.id }}" selected>{{ community }}</option>
                         {% else %}
                             <option value="{{ community.id }}">{{ community }}</option>
@@ -40,7 +41,7 @@
                 <select id="id_priorite" name="priorite">
                     {% for priority in priorities %}
                         {% if priority == p.priorite %}
-                            <option value="{{ priority.id }}">{{ priority }}</option>
+                            <option value="{{ priority.id }}" selected>{{ priority }}</option>
                         {% else %}
                             <option value="{{ priority.id }}">{{ priority }}</option>
                         {% endif %}
@@ -66,5 +67,6 @@
             </div>
 
         </form>
+    {% endblock %}
 
 {% endblock %}
