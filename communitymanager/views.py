@@ -64,19 +64,43 @@ def post(request, id):
 @login_required()
 def nouveau_post(request):
     """ Page to create a new post """
-    # Getting data
-    # Possible values for select input type
-    communities = Communaute.objects.all()
-    priorities = Priorite.objects.all()
-    # Default values
+
+    # Getting default data of a post
     p = Post()
     p.titre = 'title'
     p.description = 'description'
-    url = 'nouveau_post'
 
-    form_post = PostForm(request.POST)
-    if form_post.is_valid():
-        new_post = form_post.save()
+    # Getting possible values for select input type
+    communities = Communaute.objects.all()
+    priorities = Priorite.objects.all()
+
+    form = PostForm(request.POST)
+    if form.is_valid():
+        new_post = form.save()
         return redirect('post/{0}'.format(new_post.id))
 
     return render(request, 'nouveau_post.html', locals())
+
+
+@login_required()
+def modif_post(request, id):
+    """ Page to modify existing post, can only be done by author of post """
+
+    # Getting current data of the post
+    p = get_object_or_404(Post, id=id)
+    # Checking authorization to modify post
+    can_modify = p.auteur == request.user
+
+    if can_modify:
+        # Getting possible values for select input type
+        communities = Communaute.objects.all()
+        priorities = Priorite.objects.all()
+
+        form = PostForm(request.POST, instance=p)
+        if form.is_valid():
+            form.save()
+            return redirect('/communitymanager/post/{0}'.format(id))
+
+        return render(request, 'modif_post.html', locals())
+    else:
+       return redirect('/communitymanager/post/{0}'.format(id))
