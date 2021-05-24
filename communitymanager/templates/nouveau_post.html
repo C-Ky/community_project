@@ -11,7 +11,7 @@
 
 {% block content %}
     <h1 style="font-size: 30px">Create a new post</h1><br>
-    <form action="{% url 'post' post_id %}" method="POST">
+    <form action="{% url 'nouveau_post' %}" method="POST">
         {% csrf_token %}
         <input type="hidden" name="auteur" value="{{ user.id }}">
         <div class="a"><label for="id_communaute">Community</label><br>
