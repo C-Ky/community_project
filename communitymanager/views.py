@@ -72,10 +72,11 @@ def nouveau_post(request):
     p = Post()
     p.titre = 'title'
     p.description = 'description'
+    url = 'nouveau_post'
 
     form_post = PostForm(request.POST)
     if form_post.is_valid():
         new_post = form_post.save()
         return redirect('post/{0}'.format(new_post.id))
 
-    return render(request, 'submit_post.html', locals())
+    return render(request, 'nouveau_post.html', locals())
