@@ -22,7 +22,7 @@
         <input type="submit" value="Add a new post">
     </form>
     <br>
-    {% for post in posts %}
+    {% for post,nb_comments in posts %}
         <table class="a">
             <tr>
                 <th><a style="color: blue" href="{% url 'post' post.id %}">{{ post.titre }}</a></th>
@@ -34,7 +34,7 @@
                         <input type="submit" value="Edit post">
                     </form>
                     {% endif %}
-                    <p class="a">nb comments</p>
+                    <p class="a">{{ nb_comments }} comments</p>
                 </td>
             </tr>
             <tr>
