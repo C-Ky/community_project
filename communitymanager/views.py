@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import Communaute, Priorite, Post, Commentaire
 from .forms import SubscriptionForm, CommentaireForm, PostForm
 from django.contrib.auth.models import User
@@ -89,6 +90,11 @@ def modif_post(request, id):
 
     # Getting current data of the post
     p = get_object_or_404(Post, id=id)
+    is_event = p.evenementiel
+    if is_event:
+        event_date = p.date_evenement.isoformat()
+    else:
+        event_date = None
     # Checking authorization to modify post
     can_modify = p.auteur == request.user
 
@@ -104,4 +110,5 @@ def modif_post(request, id):
 
         return render(request, 'modif_post.html', locals())
     else:
-        return redirect(reverse('post', args=[id])) #Simpler: render another template with warning and button towards post visu
+        messages.warning(request, 'You cannot change this post.')
+        return redirect(reverse('post', args=[id]))

@@ -53,14 +53,14 @@
                 <textarea id="id_description" rows="4" cols="250" name="description" style="padding:7px">{{ p.description }}</textarea><br>
             </div>
             <div class="a">
-                {% if p.evenementiel %}
+                {% if is_event %}
                     <input type="checkbox" checked id="id_evenementiel" name="evenementiel">
                 {% else %}
                     <input type="checkbox" id="id_evenementiel" name="evenementiel">
                 {% endif %}
                 <label for="id_evenementiel" style="margin-right: 20px">Is it an event?</label>
                 <label for="id_date_evenement">Event date: </label>
-                <input type="date" id="id_date_evenement" name="date_evenement" value="{{ p.date_evenement }}"><br>
+                <input type="date" id="id_date_evenement" name="date_evenement" value="{{ event_date }}"><br>
             </div>
             <div class="a">
                 <input type="submit" value="Submit">
