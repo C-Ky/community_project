@@ -42,6 +42,7 @@ def communaute(request, id):
     # Getting all posts of the specified community
     community = get_object_or_404(Communaute, id=id)
     posts = Post.objects.filter(communaute=community)
+    posts = [(p, Commentaire.objects.filter(post=p).count) for p in posts]
     return render(request, 'communaute.html', locals())
 
 
@@ -119,5 +120,5 @@ def news_feed(request):
     """ Displays all post in anti chronological order """
     # Getting all posts
     posts = Post.objects.all().order_by('-date_creation')
-
+    posts = [(p, Commentaire.objects.filter(post=p).count) for p in posts]
     return render(request, 'news_feed.html', locals())
