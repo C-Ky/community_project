@@ -28,11 +28,11 @@
 {% block content %}
     <br>
     {% if messages %}
-        <ul class="messages" style="background-color: lightcoral; padding:7px;">
+        <div class="messages" style="background-color: lightcoral; margin-bottom:5px; padding:1px">
             {% for message in messages %}
-                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
             {% endfor %}
-        </ul>
+        </div>
     {% endif %}
     <table class="a">
         <tr>
