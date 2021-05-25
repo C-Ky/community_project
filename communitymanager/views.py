@@ -112,3 +112,12 @@ def modif_post(request, id):
     else:
         messages.warning(request, 'You cannot change this post.')
         return redirect(reverse('post', args=[id]))
+
+
+@login_required()
+def news_feed(request):
+    """ Displays all post in anti chronological order """
+    # Getting all posts
+    posts = Post.objects.all().order_by('-date_creation')
+
+    return render(request, 'news_feed.html', locals())

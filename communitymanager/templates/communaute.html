@@ -16,11 +16,12 @@
 {% endblock %}
 
 {% block content %}
-    <h1 style="font-size: 30px">{{ community }}
+    {% block title_page %}
+        <h1 style="font-size: 30px">{{ community }}</h1>
+    {% endblock %}
     <form style="text-align:right" action="{% url 'nouveau_post' %}">
         <input type="submit" value="Add a new post">
     </form>
-    </h1>
     <br>
     {% for post in posts %}
         <table class="a">
