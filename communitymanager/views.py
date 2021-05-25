@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404, redirect
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import Communaute, Priorite, Post, Commentaire
 from .forms import SubscriptionForm, CommentaireForm, PostForm
@@ -99,8 +100,8 @@ def modif_post(request, id):
         form = PostForm(request.POST, instance=p)
         if form.is_valid():
             form.save()
-            return redirect('/communitymanager/post/{0}'.format(id))
+            return redirect(reverse('post', args=[id]))
 
         return render(request, 'modif_post.html', locals())
     else:
-        return redirect('/communitymanager/post/{0}'.format(id)) #Simpler: render another template with warning and button towards post visu
+        return redirect(reverse('post', args=[id])) #Simpler: render another template with warning and button towards post visu
