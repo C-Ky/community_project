@@ -90,8 +90,7 @@ def modif_post(request, id):
 
     # Getting current data of the post
     p = get_object_or_404(Post, id=id)
-    is_event = p.evenementiel
-    if is_event:
+    if p.evenementiel:
         event_date = p.date_evenement.isoformat()
     else:
         event_date = None
@@ -103,10 +102,11 @@ def modif_post(request, id):
         communities = Communaute.objects.all()
         priorities = Priorite.objects.all()
 
-        form = PostForm(request.POST, instance=p)
-        if form.is_valid():
-            form.save()
-            return redirect(reverse('post', args=[id]))
+        if request.POST:
+            form = PostForm(request.POST, instance=p)
+            if form.is_valid():
+                form.save()
+                return redirect(reverse('post', args=[id]))
 
         return render(request, 'modif_post.html', locals())
     else:

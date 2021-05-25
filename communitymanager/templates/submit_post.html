@@ -53,7 +53,7 @@
                 <textarea id="id_description" rows="4" cols="250" name="description" style="padding:7px">{{ p.description }}</textarea><br>
             </div>
             <div class="a">
-                {% if is_event %}
+                {% if p.evenementiel %}
                     <input type="checkbox" checked id="id_evenementiel" name="evenementiel">
                 {% else %}
                     <input type="checkbox" id="id_evenementiel" name="evenementiel">
