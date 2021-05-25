@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block style2 %}
+    div.a {
+        margin: 12px;
+    }
+    input, select, textarea {
+        margin-top: 7px;
+    }
+{% endblock %}
+
+{% block content %}
+
+    <form method="POST" action={% block action %}{% endblock %} >
+        {% csrf_token %}
+        <input type="hidden" name="auteur" value="{{ user.id }}">
+        <div class="a"><label for="id_communaute">Community</label><br>
+            <select id="id_communaute" name="communaute">
+                {% for community in communities %}
+                    {% if community == p.communaute %}
+                        <option value="{{ community.id }}" selected>{{ community }}</option>
+                    {% else %}
+                        <option value="{{ community.id }}">{{ community }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select><br>
+        </div>
+        <div class="a">
+            <label for="id_titre">Title</label><br>
+            <input type="text" id="id_titre" name="titre" value="{{ p.titre }}"><br>
+        </div>
+        <div class="a">
+            <label for="id_priorite">Priority</label><br>
+            <select id="id_priorite" name="priorite">
+                {% for priority in priorities %}
+                    {% if priority == p.priorite %}
+                        <option value="{{ priority.id }}" selected>{{ priority }}</option>
+                    {% else %}
+                        <option value="{{ priority.id }}">{{ priority }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select><br>
+        </div>
+        <div class="a">
+            <label for="id_description">Description</label><br>
+            <textarea id="id_description" rows="4" cols="250" name="description" style="padding:7px">{{ p.description }}</textarea><br>
+        </div>
+        <div class="a">
+            {% if p.evenementiel %}
+                <input type="checkbox" checked id="id_evenementiel" name="evenementiel">
+            {% else %}
+                <input type="checkbox" id="id_evenementiel" name="evenementiel">
+            {% endif %}
+            <label for="id_evenementiel" style="margin-right: 20px">Is it an event?</label>
+            <label for="id_date_evenement">Event date: </label>
+            <input type="date" id="id_date_evenement" name="date_evenement" value="{{ event_date }}"><br>
+        </div>
+        <div class="a">
+            <input type="submit" value="Submit">
+        </div>
+
+    </form>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title_page %}Communities{% endblock %}
+
+{% block content %}
+    {% for c, subscribed in com %}
+        <div style="background-color: lightgrey; padding: 10px; margin-right: 100px">
+            <span><a style="color: blue" href="{% url 'communaute' c.id %}">{{ c }}</a></span>
+            <span style="text-align: right">
+                {% if subscribed %}
+                    <form action="{%  url 'communautes' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="community" value="{{ c.nom }}">
+                        <input type="hidden" name="action" value="unsubscribe">
+                        <input type="submit" value="unsubscribe">
+                    </form>
+                {% else %}
+                    <form action="{%  url 'communautes' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="community" value="{{ c.nom }}">
+                        <input type="hidden" name="action" value="subscribe">
+                        <input type="submit" value="subscribe">
+                    </form>
+                {% endif %}
+            </span>
+        </div><br>
+    {% empty %}
+        <p>There are no communities.</p>
+    {% endfor %}
+{% endblock %}

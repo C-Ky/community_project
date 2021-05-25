@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block style2 %}
+    table.a {
+        background-color: lightgrey;
+        padding: 10px;
+        width: 100%;
+    }
+    th, td {
+        text-align: left;
+        padding: 3px;
+    }
+    p.a {
+        margin: 2px;
+    }
+{% endblock %}
+
+{% block title_page %}{{ community }}{% endblock %}
+
+{% block content %}
+    <form style="text-align:right" action="{% url 'nouveau_post' %}">
+        <input type="submit" value="Add a new post">
+    </form>
+    <br>
+    {% for post in posts %}
+        <table class="a">
+            <tr>
+                <th><a style="color: blue" href="{% url 'post' post.id %}">{{ post.titre }}</a></th>
+                <td style="text-align: right" rowspan="2">
+                    <p class="a">{{ post.communaute }}</p>
+                    <p class="a">by {{ post.auteur }} on {{ post.date_creation }}</p>
+                    {% if post.auteur == user %}
+                    <form action="{% url 'modif_post' post.id %}">
+                        <input type="submit" value="Edit post">
+                    </form>
+                    {% endif %}
+                    <p class="a">nb comments</p>
+                </td>
+            </tr>
+            <tr>
+                <td>{{ post.description|truncatewords:30 }}</td>
+            </tr>
+        </table><br>
+    {% empty %}
+        <p>There are no posts in this community.</p>
+    {% endfor %}
+{% endblock %}

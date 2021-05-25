@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block style2 %}
+    table.a {
+        background-color: lightgrey;
+        padding: 10px;
+        width: 100%;
+    }
+    th, td {
+        text-align: left;
+        padding: 3px;
+    }
+    p.a {
+        margin: 2px;
+    }
+    p.b {
+        margin-left: 2px;
+        margin-bottom: 7px;
+    }
+    div.a {
+        border: 1px solid grey;
+        width: 80%;
+        margin-bottom: 10px;
+        padding: 7px;
+    }
+{% endblock %}
+
+{% block content %}
+    <br>
+    {% if messages %}
+        <ul class="messages" style="background-color: lightcoral; padding:7px;">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <table class="a">
+        <tr>
+            <th>{{ post.titre }}</th>
+            <td style="text-align: right" rowspan="{{ rowspan }}">
+                <p class="a">{{ post.communaute }}</p>
+                <p class="a">{{ post.priorite }}</p>
+                <p class="a">by {{ post.auteur }} on {{ post.date_creation }}</p>
+                {% if post.auteur == user %}
+                <form action="{% url 'modif_post' post.id %}">
+                    <input type="submit" value="Edit post">
+                </form>
+                {% endif %}
+                <p class="a">{{ nb_comments }} comments</p>
+            </td>
+        </tr>
+        <tr>
+            <td>{{ post.description }}</td>
+        </tr>
+        {% if post.evenementiel %}
+            <tr>
+                <td>Event date: {{ post.date_evenement }}</td>
+            </tr>
+        {% endif %}
+    </table><br>
+
+    {% for comment in comments %}
+        <div class="a">
+            <p class="a">Comment by {{ comment.auteur }} on {{ comment.date_creation }}</p>
+            <p class="b">{{ comment.contenu }}</p>
+        </div>
+    {% empty %}
+        <p>There are no comments for this post.</p>
+    {% endfor %}
+
+    <br><p>Add a new comment</p>
+    <form action="{%  url 'post' id %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="auteur" value="{{ user.id }}"> <!-- SEE FORMS FOR MODELS -->
+        <input type="hidden" name="post" value="{{ post.id }}">
+        <textarea type="text" rows="2" cols="210" name="contenu"></textarea><br><br>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}

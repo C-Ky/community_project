@@ -55,7 +55,9 @@ ROOT_URLCONF = 'community_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -100,6 +102,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_REDIRECT_URL = '/communitymanager/communautes'
+LOGOUT_REDIRECT_URL = '/accounts/login'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/

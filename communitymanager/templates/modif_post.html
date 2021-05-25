@@ -1,0 +1,5 @@
+{% extends 'submit_post.html' %}
+
+{% block title_page %}Modify post {{ post.titre }}<br>{% endblock %}
+
+{% block action %}"{% url 'modif_post' id %}"{% endblock %}
