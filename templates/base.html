@@ -17,12 +17,15 @@
             text-indent: 50px;
             font-size: 16px;
         }
+        span.nav {
+            padding: 10px;
+        }
         {% endblock %}
         {% block style2 %}{% endblock %}
     </style>
 </head>
 <body>
-    <div style="background-color: darkgrey;">
+    <div style="background-color: darkgrey; padding-bottom: 10px">
     {% block log %} <!-- login/logout button -->
         <div style="text-align: right; padding-right:15px; padding-top:15px">
             {% if user.is_authenticated %}
@@ -53,7 +56,16 @@
         {% endif %}
     {% endblock %}
 
-    <br><br><br>
+    <br><br>
+
+    <nav>
+        {% block nav %}
+            <span class="nav"><a href="{% url 'news_feed' %}">My news feed</a></span>
+            <span class="nav"><a href="{% url 'communautes' %}">All communities</a></span>
+            <span class="nav"><a href="{% url 'nouveau_post' %}">Add a new post</a></span>
+        {% endblock %}
+    </nav>
+
     </div>
 
     {%  block content %}{%  endblock %}
