@@ -41,9 +41,11 @@
                 <p class="a">{{ post.communaute }}</p>
                 <p class="a">{{ post.priorite }}</p>
                 <p class="a">by {{ post.auteur }} on {{ post.date_creation }}</p>
+                {% if post.auteur == user %}
                 <form action="{% url 'modif_post' post.id %}">
                     <input type="submit" value="Edit post">
                 </form>
+                {% endif %}
                 <p class="a">{{ nb_comments }} comments</p>
             </td>
         </tr>
