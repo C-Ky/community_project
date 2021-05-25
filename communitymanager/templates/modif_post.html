@@ -1,6 +1,5 @@
 {% extends 'submit_post.html' %}
 
-{% block head %}
-    <h1 style="font-size: 30px">Modify post {{ post.titre }}</h1><br>
-    <form action="{% url 'modif_post' id %}" method="POST">
-{% endblock %}
+{% block title_page %}Modify post {{ post.titre }}<br>{% endblock %}
+
+{% block action %}"{% url 'modif_post' id %}"{% endblock %}

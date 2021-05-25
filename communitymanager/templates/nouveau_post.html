@@ -1,6 +1,5 @@
 {% extends 'submit_post.html' %}
 
-{% block head %}
-    <h1 style="font-size: 30px">Create a new post</h1><br>
-    <form action="{% url 'nouveau_post' %}" method="POST">
-{% endblock %}
+{% block title_page %}Create a new post<br>{% endblock %}
+
+{% block action %}"{% url 'nouveau_post' %}"{% endblock %}
