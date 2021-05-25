@@ -29,6 +29,9 @@
                 <td style="text-align: right" rowspan="2">
                     <p class="a">{{ post.communaute }}</p>
                     <p class="a">by {{ post.auteur }} on {{ post.date_creation }}</p>
+                    <form action="{% url 'modif_post' post.id %}">
+                        <input type="submit" value="Edit post">
+                    </form>
                     <p class="a">nb comments</p>
                 </td>
             </tr>

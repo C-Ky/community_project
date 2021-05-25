@@ -32,7 +32,11 @@
             <th>{{ post.titre }}</th>
             <td style="text-align: right" rowspan="{{ rowspan }}">
                 <p class="a">{{ post.communaute }}</p>
+                <p class="a">{{ post.priorite }}</p>
                 <p class="a">by {{ post.auteur }} on {{ post.date_creation }}</p>
+                <form action="{% url 'modif_post' post.id %}">
+                    <input type="submit" value="Edit post">
+                </form>
                 <p class="a">{{ nb_comments }} comments</p>
             </td>
         </tr>

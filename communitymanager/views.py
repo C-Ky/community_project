@@ -103,4 +103,4 @@ def modif_post(request, id):
 
         return render(request, 'modif_post.html', locals())
     else:
-       return redirect('/communitymanager/post/{0}'.format(id))
+        return redirect('/communitymanager/post/{0}'.format(id)) #Simpler: render another template with warning and button towards post visu
