@@ -26,7 +26,12 @@
     {% for post,nb_comments in posts %}
         <table class="a">
             <tr>
-                <th><a style="color: blue; font-size: 20px" href="{% url 'post' post.id %}">{{ post.titre }}</a></th>
+                <th>
+                    <a style="color: blue; font-size: 20px" href="{% url 'post' post.id %}">{{ post.titre }}</a>
+                    {% if post.evenementiel %}
+                        <i class="fa fa-calendar ml-2" style="font-size:24px"></i>
+                    {% endif %}
+                </th>
                 <td style="text-align: right" rowspan="2">
                     <p class="a">{{ post.communaute }}</p>
                     <p class="a">by {{ post.auteur }} on {{ post.date_creation }}</p>
