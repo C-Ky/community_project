@@ -7,7 +7,11 @@
     }
 {% endblock %}
 
-{% block log %}<br>{% endblock %}
+{% block log %}{% endblock %}
+
+{% block nav %}{% endblock %}
+
+{% block subtitle_page %}{% endblock %}
 
 {% block content %}
     <br><br>
@@ -16,9 +20,9 @@
         <form method="post" action="{% url 'login' %}">
             {% csrf_token %}
             <!-- {{ form }} -->
-            <div style="text-indent: -93px;"><label for="username">Username:</label><br></div>
+            <label style="text-indent: -120px;" for="username">Username:</label><br>
             <input type="text" id="username" name="username"><br>
-            <div style="text-indent: -100px;"><label for="password">Password:</label><br></div>
+            <label style="margin-top:10px; text-indent: -120px" for="password">Password:</label><br>
             <input type="password" id="password" name="password"><br><br>
             <input type="submit" value="login">
             <input type="hidden" name="next" value="{{ next }}">

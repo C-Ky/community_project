@@ -8,7 +8,7 @@
     }
     th, td {
         text-align: left;
-        padding: 3px;
+        padding: 18px;
     }
     p.a {
         margin: 2px;
@@ -25,12 +25,16 @@
     }
 {% endblock %}
 
+{% block subtitle_page %}{% endblock %}
+
 {% block content %}
-    <br>
     {% if messages %}
-        <div class="messages" style="background-color: lightcoral; margin-bottom:5px; padding:1px">
+        <div class="messages p-2 mb-2">
             {% for message in messages %}
-                <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                <div class="clearfix alert alert-warning">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <span {% if message.tags %} class="{{ message.tags }} float-left"{% endif %}>{{ message }}</span>
+                </div>
             {% endfor %}
         </div>
     {% endif %}
@@ -42,9 +46,9 @@
                 <p class="a">{{ post.priorite }}</p>
                 <p class="a">by {{ post.auteur }} on {{ post.date_creation }}</p>
                 {% if post.auteur == user %}
-                <form action="{% url 'modif_post' post.id %}">
-                    <input type="submit" value="Edit post">
-                </form>
+                    <a class="btn" href="{% url 'modif_post' post.id %}" data-toggle="tooltip" title="Edit post">
+                        <i class="fa fa-edit" style="font-size:24px"></i>
+                    </a>
                 {% endif %}
                 <p class="a">{{ nb_comments }} comments</p>
             </td>
@@ -54,7 +58,7 @@
         </tr>
         {% if post.evenementiel %}
             <tr>
-                <td>Event date: {{ post.date_evenement }}</td>
+                <td><i class="fa fa-calendar" style="font-size:24px"></i> Event date: {{ post.date_evenement }}</td>
             </tr>
         {% endif %}
     </table><br>
@@ -73,7 +77,7 @@
         {% csrf_token %}
         <input type="hidden" name="auteur" value="{{ user.id }}"> <!-- SEE FORMS FOR MODELS -->
         <input type="hidden" name="post" value="{{ post.id }}">
-        <textarea type="text" rows="2" cols="210" name="contenu"></textarea><br><br>
+        <textarea type="text" rows="2" cols="163" name="contenu"></textarea><br><br>
         <input type="submit" value="Submit">
     </form>
 {% endblock %}

@@ -8,7 +8,7 @@
     }
     th, td {
         text-align: left;
-        padding: 3px;
+        padding: 18px;
     }
     p.a {
         margin: 2px;
@@ -16,23 +16,29 @@
 {% endblock %}
 
 {% block title_page %}{{ community }}{% endblock %}
+{% block on_title_line %}
+    <a class="btn" href="{% url 'nouveau_post' %}" data-toggle="tooltip" title="Add a new post">
+        <i class="fa fa-plus-circle" style="font-size:36px"></i>
+    </a>
+{% endblock %}
 
 {% block content %}
-    <form style="text-align:right" action="{% url 'nouveau_post' %}">
-        <input type="submit" value="Add a new post">
-    </form>
-    <br>
     {% for post,nb_comments in posts %}
         <table class="a">
             <tr>
-                <th><a style="color: blue" href="{% url 'post' post.id %}">{{ post.titre }}</a></th>
+                <th>
+                    <a style="color: blue; font-size: 20px" href="{% url 'post' post.id %}">{{ post.titre }}</a>
+                    {% if post.evenementiel %}
+                        <i class="fa fa-calendar ml-2" style="font-size:24px"></i>
+                    {% endif %}
+                </th>
                 <td style="text-align: right" rowspan="2">
                     <p class="a">{{ post.communaute }}</p>
                     <p class="a">by {{ post.auteur }} on {{ post.date_creation }}</p>
                     {% if post.auteur == user %}
-                    <form action="{% url 'modif_post' post.id %}">
-                        <input type="submit" value="Edit post">
-                    </form>
+                        <a class="btn" href="{% url 'modif_post' post.id %}" data-toggle="tooltip" title="Edit post">
+                            <i class="fa fa-edit" style="font-size:24px"></i>
+                        </a>
                     {% endif %}
                     <p class="a">{{ nb_comments }} comments</p>
                 </td>
